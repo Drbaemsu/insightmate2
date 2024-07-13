@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsightMate</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>InsightMate</h2>
+            <div class="header-icons">
+        		<img src="돋보기.png" alt="검색" class="header-icon">
+        		<img src="종.png" alt="알림" class="header-icon">
+        		<img src="로그인정보.png" alt="프로필" class="header-icon">
+    	</div>
+        </div>
+
+        <div class="tab">
+            <div id="sales-tab" class="tab-item active">고객별 세일즈톡</div>
+            <div id="profile-tab" class="tab-item">내프로필</div>
+        </div>
+
+        <div id="sales-content">
+            <h3>등록된 고객정보(0명)</h3>
+            <ul class="customer-list"></ul>
+        </div>
+
+        <div id="profile-content" style="display: none;">
+            <div class="form-group">
+                <label for="name-input">이름</label>
+                <input type="text" id="name-input">
+            </div>
+            <div class="form-group">
+                <label>성별</label>
+                <div class="gender-buttons">
+                    <button type="button" class="gender-button" data-gender="male">남자</button>
+                    <button type="button" class="gender-button" data-gender="female">여자</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="birth-year-input">태어난 년도</label>
+                <input type="number" id="birth-year-input">
+            </div>
+            <div class="form-group">
+                <label for="hometown-input">고향</label>
+                <input type="text" id="hometown-input">
+            </div>
+            <div class="form-group">
+                <label for="highschool-input">고등학교</label>
+                <input type="text" id="highschool-input">
+            </div>
+            <div class="form-group">
+                <label for="university-input">대학교</label>
+                <input type="text" id="university-input">
+            </div>
+            <div class="form-group">
+                <label for="graduate-input">대학원</label>
+                <input type="text" id="graduate-input">
+            </div>
+            <div class="form-group">
+                <label for="experience1-input">경력1</label>
+                <input type="text" id="experience1-input">
+            </div>
+            <div class="form-group">
+                <label for="experience2-input">경력2</label>
+                <input type="text" id="experience2-input">
+            </div>
+            <div class="form-group">
+                <label for="experience3-input">경력3</label>
+                <input type="text" id="experience3-input">
+            </div>
+            <div class="form-group">
+                <label>프로필사진</label>
+                <div id="profile-image" class="profile-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E" alt="Profile">
+                </div>
+                <input type="file" id="file-input" accept="image/*" style="display: none;">
+            </div>
+            <button type="button" class="save-button">저장하기</button>
+        </div>
+    </div>
+
+    <div id="saveModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>저장이 완료되었습니다.</p>
+        </div>
+    </div>
+
+    <div id="add-customer-button" class="add-customer">고객정보 추가</div>
+
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>고객정보 추가</h3>
+            <div class="customer-actions">
+                <button type="button" class="action-button">직접입력</button>
+                <button type="button" class="action-button">자동추가</button>
+            </div>
+        </div>
+    </div>
+
+<form id="addCustomerForm" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>고객정보 추가</h2>
+        <div class="form-group">
+            <label for="customer-name">이름</label>
+            <input type="text" id="customer-name" placeholder="한글 최대 6자">
+        </div>
+        <div class="form-group">
+            <label>성별</label>
+            <div class="gender-buttons">
+                <button type="button" class="gender-button" data-gender="male">남자</button>
+                <button type="button" class="gender-button" data-gender="female">여자</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="customer-birth-year">태어난 년도</label>
+            <input type="number" id="customer-birth-year" placeholder="년">
+        </div>
+        <div class="form-group">
+            <label for="customer-hometown">고향</label>
+            <input type="text" id="customer-hometown">
+        </div>
+        <div class="form-group">
+            <label for="customer-highschool">고등학교</label>
+            <input type="text" id="customer-highschool">
+        </div>
+        <div class="form-group">
+            <label for="customer-university">대학교</label>
+            <input type="text" id="customer-university">
+        </div>
+        <div class="form-group">
+            <label for="customer-graduate">대학원</label>
+            <input type="text" id="customer-graduate">
+        </div>
+        <div class="form-group">
+            <label for="customer-company">현재 회사</label>
+            <input type="text" id="customer-company">
+        </div>
+        <div class="form-group">
+            <label for="customer-title">호칭(직급)</label>
+            <input type="text" id="customer-title">
+        </div>
+        <div class="form-group">
+            <label for="customer-previous-company1">직전 회사1</label>
+            <input type="text" id="customer-previous-company1">
+        </div>
+        <div class="form-group">
+            <label for="customer-previous-company2">직전 회사2</label>
+            <input type="text" id="customer-previous-company2">
+        </div>
+        <div class="form-group">
+            <label>프로필 사진</label>
+            <div id="customer-profile-image" class="profile-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E" alt="Customer Profile">
+            </div>
+            <input type="file" id="customer-file-input" accept="image/*" style="display: none;">
+        </div>
+        <button type="submit" class="save-button">저장하기</button>
+    </div>
+</form>
+
+    <div id="salesTalkModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="customerNameTitle"></h2>
+            <img id="customerProfileImage" src="" alt="Customer Profile" class="profile-image">
+            <div class="tab">
+                <button type="button" class="tablinks active" onclick="openTab(event, 'physiognomy')">관상기반</button>
+                <button type="button" class="tablinks" onclick="openTab(event, 'connection')">인연기반</button>
+                <button type="button" class="tablinks" onclick="openTab(event, 'iching')">주역기반</button>
+            </div>
+            <div id="physiognomy" class="tabcontent" style="display: block;">
+                <h3>관상해설</h3>
+                <p id="physiognomyAnalysis"></p>
+                <h3>AI 세일즈톡</h3>
+                <p id="aiSalesTalk"></p>
+            </div>
+            <div id="connection" class="tabcontent">
+                <h3>인연기반 내용</h3>
+                <p>인연기반 세일즈톡 내용이 여기에 표시됩니다.</p>
+            </div>
+            <div id="iching" class="tabcontent">
+                <h3>주역기반 내용</h3>
+                <p>주역기반 세일즈톡 내용이 여기에 표시됩니다.</p>
+            </div>
+        </div>
+    </div>
+
+<div id="autoAddCustomerForm" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>고객자동 추가</h2>
+        <div class="card-photo-area">
+            <div id="card-photo-placeholder">
+                <i class="camera-icon">📷</i>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="auto-customer-name">이름</label>
+            <input type="text" id="auto-customer-name" placeholder="한글 최대 6자">
+        </div>
+        <div class="form-group">
+            <label for="auto-customer-company">현재 회사</label>
+            <input type="text" id="auto-customer-company">
+        </div>
+        <div class="form-group">
+            <label for="auto-customer-title">호칭</label>
+            <input type="text" id="auto-customer-title">
+        </div>
+        <button id="fetch-customer-info" class="fetch-button">고객정보가져오기</button>
+    </div>
+</div>
+
+<div id="autoAddCustomerForm" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>고객자동 추가</h2>
+    <div class="card-photo-area">
+      <div id="card-photo-placeholder">
+        <span class="camera-icon">📷</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="auto-customer-name">이름</label>
+      <input type="text" id="auto-customer-name">
+    </div>
+    <div class="form-group">
+      <label for="auto-customer-company">현재 회사</label>
+      <input type="text" id="auto-customer-company">
+    </div>
+    <div class="form-group">
+      <label for="auto-customer-title">호칭</label>
+      <input type="text" id="auto-customer-title">
+    </div>
+    <button id="fetch-customer-info" class="fetch-button">고객정보가져오기</button>
+  </div>
+</div>
+
+<!-- 로딩 화면을 위한 새로운 div 추가 -->
+<div id="loading-screen" class="loading-screen" style="display: none;">
+  <p>고객정보를 가져오는 중입니다</p>
+  <img src="loading.gif" alt="로딩 중" class="loading-gif">
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
